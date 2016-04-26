@@ -46,6 +46,13 @@ nav span{
 	margin: 0px 10px 0px 0px;
 }
 
+/*
+Separa los elemenos del footer.
+*/
+footer a{
+	margin: 0px 10px 0px 0px;
+}
+
 a {
   color: #00B7FF;
 }

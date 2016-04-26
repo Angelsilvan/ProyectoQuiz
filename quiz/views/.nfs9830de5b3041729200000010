@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>Quiz</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="quiz.ico" type="imagen/x-icon"/>
+  </head>
+  <body>
+    <h2>Autor: Angel Silvan Camiña</h2>
+    <img src="f1.png">
+  </body>
+</html>

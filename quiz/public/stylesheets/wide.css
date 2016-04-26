@@ -11,7 +11,7 @@ body{
 Introduce el contenido abajo para saber que estilo estamos aplicando.
 */
 #page-wrap:after{
-	content: "wide Layout";
+	content: "Wide Layout";
 }
 
 /*
