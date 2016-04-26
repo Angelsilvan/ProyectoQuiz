@@ -1,0 +1,27 @@
+/*
+Cuando carguemos esta página también se está ejecutando style.css porque se aplica siempre.
+Teniendo smartphone.css preferencia.
+*/
+
+body{
+	background: #333;
+	font-size: xx-large;
+}
+
+/*
+Introduce el contenido abajo para saber que estilo estamos aplicando.
+*/
+#page-wrap:after{
+	content: "Smartphone Layout";
+}
+
+/*
+Quitamos parte del contenido: Quiz juego de las preguntas --> Quiz;
+*/
+h2, span, section h3{
+	display: none;
+}
+
+footer, input{
+	font-size: large;
+}
