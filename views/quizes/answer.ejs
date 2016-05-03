@@ -7,10 +7,10 @@
     <link rel="icon" href="quiz.ico" type="imagen/x-icon"/>
   </head>
   <body>
-  <!--
-    <h2>Quiz : el juego de las preguntas</h2>
-  -->
     <%= respuesta%><p>
-    <a href="/quizes/question">Inténtelo de nuevo</a>
+    <a href="/quizes/<%=quiz.id%>">Vuelva a jugar</a>
+    <!-- Si queremos volver a la lista de preguntas total en vez de la pregunta anterior ponemos:
+    <a href="/quizes">Vuelva a jugar</a>
+    -->
   </body>
 </html>

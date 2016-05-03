@@ -10,8 +10,8 @@
   <!--
     <h2>Quiz : el juego de las preguntas</h2>
   -->
-    <form method="get" action="/quizes/answer">
-    	Pregunta: <%= pregunta %> <p> 
+    <form method="get" action="/quizes/<%= quiz.id %>/answer">
+    	<h1>Pregunta: <%= quiz.pregunta %> </h1>
     	<input type="text" name="respuesta" placeholder="Responda aquí"/>
     	<input type="submit" value="Enviar"/>
     </form>

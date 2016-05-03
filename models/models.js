@@ -20,8 +20,12 @@ sequelize.sync().then(function(){			//Sincronizamos las definiciones que hay en 
 			Quiz.create({pregunta:'Capital de Italia',	//Inicializamos la tabla si está vacía (0 filas).
 						 respuesta: 'Roma'
 
+			});
+			Quiz.create({pregunta:'Capital de Portugal',	//Inicializamos la tabla si está vacía (0 filas).
+						 respuesta: 'Lisboa'
+
 			})
-		.then(function(){console.log('Base de datos Inicializada')});
+		.then(function(){console.log('Base de datos inicializada')});
 		};
 	});
 });

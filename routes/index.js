@@ -7,8 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', {title:'Quiz'});
 });
 
-router.get('/quizes/question', quizController.question);
-router.get('/quizes/answer', quizController.answer);
+//Visualización de los recursos.
+router.get('/quizes', quizController.index);
+router.get('/quizes/:quizId(\\d+)', quizController.show);			//Identificador con 1 o más digitos decimales (\\d+).
+router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 router.get('/author', quizController.author);
 
 module.exports = router;
