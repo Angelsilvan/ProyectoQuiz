@@ -7,16 +7,19 @@
     <link rel="icon" href="quiz.ico" type="imagen/x-icon"/>
   </head>
   <body>
-    <h1>Preguntas del Quiz</h1>
-    <table>
-
+    <h2>Preguntas del Quiz</h2>
+    <table id="table">
       <!--Renderizamos filas de la tabla.
           Cada iteración genera un elemento.
       -->
-
       <% for(var i in quizes) { %> 
           <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
       <% } %>
     </table>
+      <form method="get" action="/quizes">
+        <h2>Buscador de preguntas</h2>
+        <input type="text" id ="busqueda" name="busqueda" placeholder="Responda aquí"/>
+        <input type="submit" value="Enviar"/>
+      </form>
   </body>
 </html>

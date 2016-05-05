@@ -2,9 +2,17 @@ var models = require('../models/models.js');
 
 // GET /quizes
 exports.index = function(req,res){
-	models.Quiz.findAll().then(function(quizes){			//Buscamos todos los elementos para luego listarlos.
+	if(req.query.busqueda === undefined || req.query.busqueda === '' ){
+		models.Quiz.findAll().then(function(quizes){		//Buscamos todos los elementos si no buscamos nada.
 		res.render('quizes/index.ejs', {quizes: quizes});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
-	})
+		})
+	}
+	else{	//Si hemos introducido algo no vacío en el cajetín
+		var busqueda = req.query.busqueda.replace(/ /g, "%");	//Palabra introducida
+		models.Quiz.findAll({where: ["pregunta like ?", "%"+busqueda+"%"], order: ["pregunta"]}).then(function(quizes){
+		res.render('quizes/index.ejs', {quizes: quizes});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
+		})	
+	}													//Solo con los elementos buscados.
 };
 
 // GET /quizes/:id

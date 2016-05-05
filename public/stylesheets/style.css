@@ -26,7 +26,7 @@ Crea el marco pequeño entre el body y el page-wrap
 }
 
 section > div{
-	padding: 20px;
+	padding: 50px;
 }
 
 header, nav, section{
@@ -56,3 +56,4 @@ footer a{
 a {
   color: #00B7FF;
 }
+
