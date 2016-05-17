@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 //Visualización de los recursos.
-router.get('/quizes', quizController.index);
-router.get('/quizes/:quizId(\\d+)', quizController.show);			//Identificador con 1 o más digitos decimales (\\d+).
+router.get('/quizes.:format?', quizController.index);
+router.get('/quizes/:quizId(\\d+).:format?', quizController.show);			//Identificador con 1 o más digitos decimales (\\d+).
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 router.get('/author', quizController.author);
 
