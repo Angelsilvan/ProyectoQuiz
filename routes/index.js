@@ -7,6 +7,9 @@ router.get('/', function(req, res, next) {
   res.render('index', {title:'Quiz'});
 });
 
+//Autoload de comandos con quiz:Id
+router.param('quizId', quizController.load);
+
 //Visualización de los recursos.
 router.get('/quizes.:format?', quizController.index);
 router.get('/quizes/:quizId(\\d+).:format?', quizController.show);			//Identificador con 1 o más digitos decimales (\\d+).
