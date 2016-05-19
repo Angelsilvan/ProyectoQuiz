@@ -4,7 +4,13 @@
 
 module.exports = function(sequelize, DataTypes){
 	return sequelize.define('Quiz',  				//Nombre de la tabla
-			{ pregunta: DataTypes.STRING,			//Campo específico de la aplicación: texto
-			  respuesta: DataTypes.STRING,			//Campo específico de la aplicación:texto
+			{ pregunta: {
+			 	type :DataTypes.STRING,			//Campo específico de la aplicación: texto
+			 	validate: {notEmpty: {msg:" --> Falta la pregunta"}}				//notEmpty es una función interna de sequelize que permite ver si el campo está o no vacío.
+			 },
+			  respuesta: {
+			  	type: DataTypes.STRING,			//Campo específico de la aplicación:texto
+			  	validate: {notEmpty: {msg:" --> Falta la respuesta"}}
+			 },
 			});
 }

@@ -22,6 +22,14 @@ h2, span, section h3{
 	display: none;
 }
 
+/*
+Saca en naranja los errors al crear una pregunta.
+*/
+#ErrorMsgs{
+	color:#f61;
+	font-size: smaler;
+}
+
 footer, input{
 	font-size: large;
 }

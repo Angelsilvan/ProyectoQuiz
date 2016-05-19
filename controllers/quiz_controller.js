@@ -21,7 +21,7 @@ exports.index = function(req,res){
 				res.json(quizes);
 			}
 			else {
-				res.render('quizes/index.ejs', {quizes: quizes});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
+				res.render('quizes/index.ejs', {quizes: quizes, errors:[]});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
 			}
 		}).catch(function(error){next(error);});
 	}
@@ -32,14 +32,14 @@ exports.index = function(req,res){
 			res.json(quizes);
 		}
 		else {
-			res.render('quizes/index.ejs', {quizes: quizes});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
+			res.render('quizes/index.ejs', {quizes: quizes, errors:[]});	//Pasamos toda la matriz al renderizador que tendrá tantos elementos como filas tiene la tabla.
 		}})	
 	}													//Solo con los elementos buscados.
 };
 
 // GET /quizes/:id(\\d).:format?
 exports.show = function(req, res){
-		res.render('quizes/show',{quiz:req.quiz});						//Renderizamos la vista.
+		res.render('quizes/show',{quiz:req.quiz, errors:[]});						//Renderizamos la vista.
 };
 
 // GET /quizes/answer
@@ -48,26 +48,32 @@ exports.answer = function(req, res){
 		if (req.query.respuesta === req.quiz.respuesta){
 			resultado = 'Correcto';
 		}
-			res.render('quizes/answer', {quiz:req.quiz, respuesta: resultado});	//Renderizamos que es incorrecto.
+			res.render('quizes/answer', {quiz:req.quiz, respuesta: resultado, errors:[]});	//Renderizamos que es incorrecto.
 };
 
 exports.author = function(req,res){
-	res.render('author.ejs');
+	res.render('author.ejs',{errors:[]});
 };
 
 exports.new = function(req, res){
 	var quiz = models.Quiz.build({
 		pregunta:"Pregunta", respuesta:"Respuesta"
 	});
-	res.render('quizes/new', {quiz:quiz});
+	res.render('quizes/new', {quiz:quiz, errors:[]});
 };
 
 //POST /quizes/create 
 exports.create = function(req,res){
 	var quiz = models.Quiz.build(req.body.quiz);
-
-	//Guarda en la DB los campso pregunta y respuesta de quiz
-	quiz.save({fields:["pregunta", "respuesta"]}).then(function(){
-		res.redirect('/quizes');
-	})	// La primitiva POST no tiene asociada una renderización por lo que hacemos una redirección HTTP para cargar de nuevo la página de preguntas.
+	quiz.validate().then(function(err){				//validate indica si está todo correcto o no.
+		if(err){
+			res.render('quizes/new', {quiz:quiz, errors: err.errors});		//Si hay errores se pasan los errores.
+		}
+		else{	//Si no ha habido ningún error guardamos la pregunta en la base de datos.
+			//Guarda en la DB los campso pregunta y respuesta de quiz
+			quiz.save({fields:["pregunta", "respuesta"]}).then(function(){
+				res.redirect('/quizes')
+			})	// La primitiva POST no tiene asociada una renderización por lo que hacemos una redirección HTTP para cargar de nuevo la página de preguntas.
+		}
+	});
 };

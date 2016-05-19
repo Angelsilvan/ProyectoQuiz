@@ -28,6 +28,14 @@ nav span{
 }
 
 /*
+Saca en naranja los errors al crear una pregunta.
+*/
+#ErrorMsgs{
+	color:#f61;
+	font-size: smaler;
+}
+
+/*
 Flota a la derecha
 */
 section{
