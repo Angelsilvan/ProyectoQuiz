@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>Quiz</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="quiz.ico" type="imagen/x-icon"/>
+  </head>
+  <body>
+  Añadir pregunta: <p>
+  <form method="post" action="/quizes/create"> 
+  <!--Incluimos la vista parcial separada que es común siempre.
+  -->
+      <% include _form.ejs %> 
+  </form>
+  </body>
+</html>

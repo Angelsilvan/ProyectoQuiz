@@ -54,3 +54,20 @@ exports.answer = function(req, res){
 exports.author = function(req,res){
 	res.render('author.ejs');
 };
+
+exports.new = function(req, res){
+	var quiz = models.Quiz.build({
+		pregunta:"Pregunta", respuesta:"Respuesta"
+	});
+	res.render('quizes/new', {quiz:quiz});
+};
+
+//POST /quizes/create 
+exports.create = function(req,res){
+	var quiz = models.Quiz.build(req.body.quiz);
+
+	//Guarda en la DB los campso pregunta y respuesta de quiz
+	quiz.save({fields:["pregunta", "respuesta"]}).then(function(){
+		res.redirect('/quizes');
+	})	// La primitiva POST no tiene asociada una renderización por lo que hacemos una redirección HTTP para cargar de nuevo la página de preguntas.
+};
