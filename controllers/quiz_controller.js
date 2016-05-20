@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var sessionController = require('../controllers/session_controller');
 
 //Autoload - Factoriza el código si la ruta incluye :quizId
 exports.load = function(req,res,next,quizId){
@@ -11,6 +12,26 @@ exports.load = function(req,res,next,quizId){
 			next(new Error ('No existe quizId = ' + quizId));
 		}
 	}).catch(function(error){next(error);});
+};
+
+exports.contador = function(req, res, next){
+	var ahora = new Date();
+	if(req.session.user){
+		var inicio = req.session.user.minutos*60 + req.session.user.segundos;
+		var actual = ahora.getMinutes()*60 + ahora.getSeconds();
+		var conexion = actual - inicio;
+		if (conexion > 120){		//Si el usuario está logueado y su sesión lleva más de dos minutos.
+			res.redirect('/logout');	//Destruimos la sesión.
+		} 
+		else {		//Si el usuario está logueado pero su sesión no ha caducado, reiniciamos el atributo de la hora.
+			req.session.user.minutos = ahora.getMinutes();
+			req.session.user.segundos = ahora.getSeconds();
+			next();
+		}
+	} 
+	else {				//Si el usuario no está logueado pasamos al siguiente middleware.
+		next();
+	}
 };
 
 // GET /quizes.:format?

@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var partials = require('express-partials')
+var partials = require('express-partials');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 
@@ -22,8 +23,20 @@ app.use(partials());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('Quiz 2016'));
+app.use(session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Helpers dinámicos
+app.use(function(req,res,next){
+    //Guardar path en session.redir para despues login
+    if(!req.path.match(/\/login|\/logout/)){  //Se hace siempre salvo en las primitivas login y logout.
+      req.session.redir = req.path;
+    }
+    //Hacer visible req.session en las vistas
+    res.locals.session = req.session;
+    next();
+});
 
 app.use('/', routes);
 
